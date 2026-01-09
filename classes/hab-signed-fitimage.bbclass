@@ -20,9 +20,10 @@ DEPENDS:append = " \
 
 DEPENDS:append:ahab = "imx-mkimage-native"
 
-FITLOADADDR ?= ""
-FITLOADADDR:ahab ?= "0x80400000"
-FITLOADADDR:hab4 ?= "0x48000000"
+DEFAULT_FITLOADADDR = ""
+DEFAULT_FITLOADADDR:ahab = "0x80400000"
+DEFAULT_FITLOADADDR:hab4 = "0x48000000"
+FITLOADADDR ??= "${DEFAULT_FITLOADADDR}"
 
 do_prepare_fitimage() {
     mkdir -p "${SIGNDIR}"
