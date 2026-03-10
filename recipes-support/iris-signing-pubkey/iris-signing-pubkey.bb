@@ -8,6 +8,11 @@ FILES:${PN} = "${sysconfdir}/iris/signing"
 
 SRC_URI = "file://${ROOTHASH_SIGNING_PUBLIC_KEY}"
 
+python __anonymous () {
+    if not d.getVar("ROOTHASH_SIGNING_PUBLIC_KEY"):
+        raise bb.parse.SkipRecipe("ROOTHASH_SIGNING_PUBLIC_KEY is not set")
+}
+
 do_install() {
     install -d ${D}${sysconfdir}/iris/signing
     install -m 0644 ${ROOTHASH_SIGNING_PUBLIC_KEY} ${D}${sysconfdir}/iris/signing/roothash-public-key.pem
